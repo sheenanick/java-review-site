@@ -21,25 +21,36 @@ A program to add links to resources and allow users to leave reviews/ratings.
 * As an admin or user, I want to be able to update a review if there are mistakes or inaccuracies. (Again, don't worry about user authentication, simply allow anyone to delete/update anything).
 * As an admin, I want to be able to delete any reviews that aren't helpful or appropriate.
 * As a user, I want to see how many reviews, or average rating a link has.  
-* As a user, I want to be able to submit a form to search for a link by name, or by another property. (Hint: Use a SQL query).
-* As an (indecisive) user, I may want the equivalent of an "I'm feelin' lucky" button to show me a link at random.
 * As a user, I want to see a professional, easy-to-navigate user interface.
 
 #### Database Schema
 ![database diagram](database.png)
 
 #### Technical Specifications
-| Behavior                             | Input                                            | Output                                           |
-|--------------------------------------|--------------------------------------------------|--------------------------------------------------|
-| Store technology name                | 'Java'                                           | 'Java'                                           |
-| Store link title                     | 'Oracle Documentation'                           | 'Oracle Documentation'                           |
-| Store link url                       | https://docs.oracle.com/javase/7/docs/api/       | https://docs.oracle.com/javase/7/docs/api/       |
-| Store link description               | 'everything you never wanted to know about Java' | 'everything you never wanted to know about Java' |
-| Connects link to technology category | 'Oracle Documentation'                           | 'Java'                                           |
-| Lists links by technology            | 'Java'                                           | 'Oracle Documentation'                           |
-| Update links                         | https://docs.oracle.com/javase/8/docs/api/       | https://docs.oracle.com/javase/8/docs/api/       |
-| Delete links                         | 'Starbucks Java Beans'                           | null                                             |
 
+| Behavior                              | Input                                            | Output                                           |
+|---------------------------------------|--------------------------------------------------|--------------------------------------------------|
+| Store technology name                 | 'Java'                                           | 'Java'                                           |
+| Store link title                      | 'Oracle Documentation'                           | 'Oracle Documentation'                           |
+| Store link url                        | https://docs.oracle.com/javase/7/docs/api/       | https://docs.oracle.com/javase/7/docs/api/       |
+| Store link description                | 'everything you never wanted to know about Java' | 'everything you never wanted to know about Java' |
+| Connects link to technology category  | 'Oracle Documentation'                           | 'Java'                                           |
+| Lists links by technology             | 'Java'                                           | 'Oracle Documentation'                           |
+| Update links                          | https://docs.oracle.com/javase/8/docs/api/       | https://docs.oracle.com/javase/8/docs/api/       |
+| Delete links                          | 'Starbucks Java Beans'                           | null                                             |
+| Store review title                    | 'It sucks!'                                      | 'It sucks!'                                      |
+| Store review comments                 | 'I can't find anything useful here'              | 'I can't find anything useful here'              |
+| Store review rating                   | 2                                                | 2                                                |
+| Store reviewer name                   | 'noneofyourbusiness'                             | noneofyourbusiness'                              |
+| Store reviewer email                  | 'nyb@sample.com'                                 | 'nyb@sample.com'                                 |
+| Store date submitted                  | '2004-10-19 10:23:54'                            | '2004-10-19 10:23:54'                            |
+| Connects reviews to resource          | 'It sucks!'                                      | 'Oracle Documentation'                           |
+| List reviews by resource              | 'Oracle Documentation'                           | 'It sucks!'                                      |
+| Update reviews                        | 'It's great'                                     | 'It's great'                                     |
+| Delete reviews                        | 'It sucks!'                                      | null                                             |
+| Calculate average rating for resource | 2                                                | 2                                                |
+| Sort resources by average rating      | N/A                                              | sorted list                                      |
+| Count number of reviews for resource  | 1                                                | 1                                                |
 ## Setup/Installation
 * Clone directory
 * Type 'gradle run' inside the directory
