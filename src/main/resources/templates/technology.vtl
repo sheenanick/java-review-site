@@ -1,0 +1,21 @@
+<h1>$tech.getName()</h1>
+
+#foreach ($link in $links)
+  <a href="/resources/$link.getId()"><li>$link.getTitle()</li></a>
+#end
+<h3>Add a new resource</h3>
+<form action='/technologies/$tech.getId()' method='post'>
+  <div class="form-group">
+    <label for="title">Title: </label>
+    <input id="title" name="title" class="form-control" type="text">
+  </div>
+  <div class="form-group">
+    <label for="name">URL: </label>
+    <input id="url" name="url" class="form-control" type="text">
+  </div>
+  <div class="form-group">
+    <label for="name">Description: </label>
+    <input id="desc" name="desc" class="form-control" type="text">
+  </div>
+  <button type='submit' class='btn'>Add</button>
+</form>

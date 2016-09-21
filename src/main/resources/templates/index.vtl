@@ -1,9 +1,14 @@
-<h1>My Form</h1>
-<form action='/result'>
+<h1>Technologies</h1>
+
+#foreach ($technology in $technologies)
+  <a href="/technologies/$technology.getId()"><li>$technology.getName()</li></a>
+#end
+<h3>Add a new technology</h3>
+<form action='/result' method='post'>
   <div class="form-group">
-    <label for="item1">Item 1: </label>
-    <input id="item1" name="item1" class="form-control" type="text">
+    <label for="name">Name: </label>
+    <input id="name" name="name" class="form-control" type="text">
   </div>
 
-  <button type='submit' class='btn'>Get Results!</button>
+  <button type='submit' class='btn'>Add</button>
 </form>

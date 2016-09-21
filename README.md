@@ -14,7 +14,7 @@ A program to add links to resources and allow users to leave reviews/ratings.
 * As a user, I want to be able to add links I have seen with relevant details.
 * As an admin, I want to be able to update any/all links to add relevant information, or to correct errors. (Important: Don't worry about user authentication, simply allow anyone to delete/update anything for the time being).
 * As an admin, I want to be able to delete a links if it doesn't contain accurate information, or isn't relevant.
-* As a user, I want to leave comments and explanation with my review including the date I used them.
+* As a user, I want to leave comments and explanation with my review including the date submitted.
 * As a user, I want to leave some sort of quantitative rating measurement with my review.
 * As a user, I want to see all reviews for a specific links I'm considering looking at.
 * As a user, I want to sort links by any ratings reviewers left.
