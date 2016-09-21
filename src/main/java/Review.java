@@ -1,64 +1,103 @@
 import org.sql2o.*;
 import java.util.List;
 
-public class Resource {
-  private int id;
+public class Review {
+  private int id=0;
   private String title;
-  private String url;
-  private String description;
-  private int techid;
+  private String review;
+  private int rating;
+  private String reviewer;
+  private String email;
+  private int resourceid;
+  private String date="";
 
-  public Resource(String title, String url, String description, int techid) {
+  public Review(String title, String review, int rating, String reviewer, String email, int resourceid) {
     this.title = title;
-    this.url = url;
-    this.description = description;
-    this.techid = techid;
+    this.review = review;
+    this.rating = rating;
+    this.reviewer = reviewer;
+    this.email = email;
+    this.resourceid = resourceid;
 
     try(Connection cn = DB.sql2o.open()) {
-      String sql = "INSERT INTO resources (title, url, description, techid) VALUES (:title, :url, :description, :techid)";
+      String sql = "INSERT INTO reviews (title, review, rating, reviewer, email, resourceid) VALUES (:title, :review, :rating, :reviewer, :email, :resourceid)";
       this.id = (int) cn.createQuery(sql, true)
         .addParameter("title", this.title)
-        .addParameter("description", this.description)
-        .addParameter("url", this.url)
-        .addParameter("techid", this.techid)
+        .addParameter("review", this.review)
+        .addParameter("rating", this.rating)
+        .addParameter("reviewer", this.reviewer)
+        .addParameter("email", this.email)
+        .addParameter("resourceid", this.resourceid)
         .executeUpdate()
         .getKey();
     }
+
+    // TODO: get date from database to complete object properties
+    // TODO: update average rating for resource
+    // Resource.findById(resourceid).setAverage(getAverageByResource(id));
+    // TODO: update review count for resource
+    // Resource.findById(resourceid).setCount(getCountByResource(id));
   }
 
   public int getId() {
     return id;
   }
 
+  public String getDate() {
+    return date;
+  }
+
   public String getTitle() {
     return title;
   }
 
-  public String getUrl() {
-    return url;
+  public String getReview() {
+    return review;
   }
 
-  public String getDescription() {
-    return description;
+  public int getRating() {
+    return rating;
   }
 
-  public int getTechId() {
-    return techid;
+  public String getReviewer() {
+    return reviewer;
   }
 
-  public static List<Resource> all() {
-    String sql = "SELECT * FROM resources ORDER BY title";
-    try(Connection cn = DB.sql2o.open()) {
-      return cn.createQuery(sql).executeAndFetch(Resource.class);
+  public String getEmail() {
+    return email;
+  }
+
+  public int getResourceId() {
+    return resourceid;
+  }
+
+  public static int getCountByResource(int id) {
+    try (Connection cn = DB.sql2o.open()) {
+      String sql = "SELECT COUNT(id) FROM reviews WHERE resourceid = :id";
+      return cn.createQuery(sql).addParameter("id", id).executeScalar(Integer.class);
     }
   }
 
-  public static List<Resource> allByTech(int id) {
-    String sql = "SELECT * FROM resources WHERE techid = :id ORDER BY title";
+  public static int getAverageByResource(int id) {
+    try (Connection cn = DB.sql2o.open()) {
+      String sql = "SELECT AVG(rating) FROM reviews WHERE resourceid = :id";
+      return cn.createQuery(sql).addParameter("id", id).executeScalar(Integer.class);
+    }
+  }
+
+  public static List<Review> all() {
+    String sql = "SELECT * FROM reviews ORDER BY date";
+    try(Connection cn = DB.sql2o.open()) {
+      return cn.createQuery(sql).executeAndFetch(Review.class);
+    }
+  }
+
+  public static List<Review> allByResource(int id) {
+    String sql = "SELECT * FROM reviews WHERE resourceid = :id ORDER BY date";
     try(Connection cn = DB.sql2o.open()) {
       return cn.createQuery(sql)
       .addParameter("id", id)
-      .executeAndFetch(Resource.class);
+      .executeAndFetch(Review.class);
     }
   }
 

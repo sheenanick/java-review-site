@@ -63,4 +63,12 @@ public class ResourceTest {
     assertTrue(Resource.allByTech(tech.getId()).size()>1);
   }
 
+  @After
+  public void tearDown() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM resources *;";
+      con.createQuery(sql).executeUpdate();
+    }
+  }
+
 }

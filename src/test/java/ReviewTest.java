@@ -7,18 +7,19 @@ public class ReviewTest {
   private Review review;
   private Review review2;
   private Resource resource;
+  private Technology tech;
 
   @Before
   public void setUp() {
     DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/programmer_resource_test", null, null);
-    resource = new Resource("Java");
-    review = new Review("Oracle Documentation",
+    tech = new Technology("Java");
+    resource = new Resource("Oracle Documentation",
                         "https://docs.oracle.com/javase/7/docs/api/",
-                        "everything you never wanted to know about Java", resource.getId());
-    review2 = new Review("Epicodus Java Course",
-                        "https://www.learnhowtoprogram.com/java",
-                        "the best way to learn Java",
-                        resource.getId());
+                        "everything you never wanted to know about Java", tech.getId());
+    review = new Review("It sucks!", "I can't find anything useful here", 2,
+                        "noneofyourbusiness", "nyb@sample.com", resource.getId());
+    review2 = new Review("It's great!", "Everything I ever wanted to know", 5,
+                        "knowitall", "kia@sample.com", resource.getId());
   }
 
   @Test
@@ -28,27 +29,37 @@ public class ReviewTest {
 
   @Test
   public void Review_instantiatesWithId_true() {
-    assertEquals(true, review.getId() >0);
+    assertTrue(review.getId() >0);
   }
 
   @Test
   public void Review_instantiatesWithTitle_true() {
-    assertEquals("Oracle Documentation", review.getTitle());
+    assertEquals("It sucks!", review.getTitle());
   }
 
   @Test
-  public void Review_instantiatesWithUrl_true() {
-    assertEquals("https://docs.oracle.com/javase/7/docs/api/", review.getUrl());
+  public void Review_instantiatesWithReview_true() {
+    assertEquals("I can't find anything useful here", review.getReview());
   }
 
   @Test
-  public void Review_instantiatesWithDescription_true() {
-    assertEquals("everything you never wanted to know about Java", review.getDescription());
+  public void Review_instantiatesWithRating_true() {
+    assertEquals(2, review.getRating());
   }
 
   @Test
-  public void Review_instantiatesWithTechId_true() {
-    assertEquals(resource.getId(), review.getTechId());
+  public void Review_instantiatesWithReviewer_true() {
+    assertEquals("noneofyourbusiness", review.getReviewer());
+  }
+
+  @Test
+  public void Review_instantiatesWithEmail_true() {
+    assertEquals("nyb@sample.com", review.getEmail());
+  }
+
+  @Test
+  public void Review_instantiatesWithResourceId_true() {
+    assertEquals(resource.getId(), review.getResourceId());
   }
 
   @Test
@@ -57,8 +68,25 @@ public class ReviewTest {
   }
 
   @Test
-  public void Review_returnsAllTechInstances_true() {
-    assertTrue(Review.allByTech(resource.getId()).size()>1);
+  public void Review_returnsAllResourceInstances_true() {
+    assertTrue(Review.allByResource(resource.getId()).size()>1);
   }
 
+  @Test
+  public void getCountByResource_returnsCount_int() {
+    assertEquals(true, Review.getCountByResource(resource.getId())>=2);
+  }
+
+  @Test
+  public void getAverageByResource_returnsCount_int() {
+    assertEquals(3, Review.getAverageByResource(resource.getId()));
+  }
+
+  // @After
+  // public void tearDown() {
+  //   try(Connection con = DB.sql2o.open()) {
+  //     String sql = "DELETE FROM reviews *;";
+  //     con.createQuery(sql).executeUpdate();
+  //   }
+  // }
 }

@@ -7,6 +7,8 @@ public class Resource {
   private String url;
   private String description;
   private int techid;
+  private int avgrating;
+  private int reviewcount;
 
   public Resource(String title, String url, String description, int techid) {
     this.title = title;
@@ -24,6 +26,21 @@ public class Resource {
         .executeUpdate()
         .getKey();
     }
+  }
+  protected void setAverage(int avg) {
+    avgrating = avg;
+  }
+
+  public int getAverageRating() {
+    return avgrating;
+  }
+
+  protected void setCount(int count) {
+    reviewcount = count;
+  }
+
+  public int getReviewCount() {
+    return reviewcount;
   }
 
   public int getId() {
@@ -44,6 +61,16 @@ public class Resource {
 
   public int getTechId() {
     return techid;
+  }
+
+  public static Resource findById(int id) {
+    try(Connection cn = DB.sql2o.open()) {
+      String sql = "SELECT * FROM resources WHERE id=:id";
+      Resource link = cn.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Resource.class);
+      return link;
+    }
   }
 
   public static List<Resource> all() {

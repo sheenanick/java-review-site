@@ -1,0 +1,45 @@
+<h1>$resource.getTitle()</h1>
+
+#foreach ($review in $reviews)
+  <div>
+    <h3>$review.getTitle() - <span class="p$review.getRating()">$review.getRating()</span></h3>
+    <p><em>$review.getDate()</em></p>
+    <p>$review.getReview()</p>
+    <p><a href="mailto://$review.getEmail()">$review.getReviewer()</a></p>
+  </div>
+#end
+<h3>Add a new review</h3>
+<form action='/resources/$resource.getId()' method='post'>
+  <div class="row">
+    <div class="form-group col-xs-6">
+      <label for="title">Title: </label>
+      <input id="title" name="title" class="form-control" type="text">
+    </div>
+    <div class="form-group col-xs-6">
+      <label for="rating">Rating: </label>
+      <input id="rating" name="rating" class="form-control" type="text">
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-xs-12">
+      <label for="review">Review: </label>
+      <input id="review" name="review" class="form-control" type="text">
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-xs-6">
+      <label for="reviewer">Reviewer: </label>
+      <input id="reviewer" name="reviewer" class="form-control" type="text">
+    </div>
+    <div class="form-group col-xs-6">
+      <label for="email">Email: </label>
+      <input id="email" name="email" class="form-control" type="text">
+    </div>
+    <div class="row">
+      <div class="col-xs-1"></div>
+      <div class="col-xs-10">
+        <button type='submit' class='btn btn-default form-control'>Add</button>
+      </div>
+    </div>
+  </div>
+</form>

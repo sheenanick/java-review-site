@@ -48,5 +48,29 @@ public class App {
       model.put("template", "templates/technology.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    get("/resources/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      int category = Integer.parseInt(request.params(":id"));
+      model.put("resource", Resource.findById(category));
+      model.put("reviews", Review.allByResource(category));
+      model.put("template", "templates/resource.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/resources/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      int category = Integer.parseInt(request.params(":id"));
+      Review review = new Review(request.queryParams("title"),
+                                request.queryParams("review"),
+                                Integer.parseInt(request.queryParams("rating")),
+                                request.queryParams("reviewer"),
+                                request.queryParams("email"),
+                                category);
+      model.put("resource", Resource.findById(category));
+      model.put("reviews", Review.allByResource(category));
+      model.put("template", "templates/resource.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
   }
 }

@@ -43,11 +43,11 @@ public class TechnologyTest {
     assertTrue(tech.equals(otherTech));
   }
 
-  // @After
-  // public void tearDown() {
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String sql = "DELETE FROM technologies *;";
-  //     con.createQuery(sql).executeUpdate();
-  //   }
-  // }
+  @After
+  public void tearDown() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM technologies *;";
+      con.createQuery(sql).executeUpdate();
+    }
+  }
 }

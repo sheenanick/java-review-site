@@ -50,7 +50,7 @@ public class Technology {
   }
 
   public static List<Technology> all() {
-    String sql = "SELECT * FROM technologies ORDER BY name";
+    String sql = "SELECT * FROM technologies ORDER BY UPPER(name)";
     try(Connection cn = DB.sql2o.open()) {
       return cn.createQuery(sql).executeAndFetch(Technology.class);
     }

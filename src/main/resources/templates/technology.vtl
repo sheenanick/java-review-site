@@ -1,8 +1,9 @@
 <h1>$tech.getName()</h1>
-
+<ul>
 #foreach ($link in $links)
-  <a href="/resources/$link.getId()"><li>$link.getTitle()</li></a>
+  <li><a href="/resources/$link.getId()">$link.getTitle()</a>: <!--$link.getReviewCount() reviews, rating:   $link.getAverageRating()--></li>
 #end
+</ul>
 <h3>Add a new resource</h3>
 <form action='/technologies/$tech.getId()' method='post'>
   <div class="form-group">
