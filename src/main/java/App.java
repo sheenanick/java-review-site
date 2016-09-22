@@ -27,16 +27,37 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/edit/reviews/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Review review = Review.findById(Integer.parseInt(request.params(":id")));
+      model.put("review", review);
+      model.put("template", "templates/edit-review.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
-    // post("/edit/technologies/id", (request, response) -> {
-    //   Map<String, Object> model = new HashMap<String, Object>();
-    //   Technology tech = new Technology(request.queryParams("name"));
-    //   //update
-    //   response.redirect("/");
-    //   model.put("technologies", Technology.all());
-    //   model.put("template", "templates/index.vtl");
-    //   return new ModelAndView(model, layout);
-    // }, new VelocityTemplateEngine());
+    post("/edit/reviews/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      int resourceId = Review.findById(Integer.parseInt(request.params(":id"))).getResourceId();
+      int techId = Resource.findById(resourceId).getTechId();
+      int reviewId = Integer.parseInt(request.params(":id"));
+      String title = request.queryParams("title");
+      String review = request.queryParams("review");
+      String reviewer = request.queryParams("reviewer");
+      String email = request.queryParams("email");
+      Review.update(title, review, reviewer, email, reviewId);
+      response.redirect("/technologies/" + techId + "/resources/" + resourceId);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+
+    get("/delete/reviews/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      int resourceId = Review.findById(Integer.parseInt(request.params(":id"))).getResourceId();
+      int techId = Resource.findById(resourceId).getTechId();
+      Review.delete(Integer.parseInt(request.params(":id")));
+      response.redirect("/technologies/" + techId + "/resources/" + resourceId);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
     get("/technologies/:tid", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
@@ -60,7 +81,26 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    //post("/edit/technologies/:tid");
+    get("/edit/resources/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Resource link = Resource.findById(Integer.parseInt(request.params(":id")));
+      model.put("link", link);
+      model.put("template", "templates/edit-resource.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/edit/resources/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      int resourceId = Integer.parseInt(request.params(":id"));
+      int techId = Resource.findById(resourceId).getTechId();
+      String title = request.queryParams("title");
+      String url = request.queryParams("url");
+      String desc = request.queryParams("desc");
+      Resource.update(resourceId, title, url, desc);
+      response.redirect("/technologies/" + techId);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
     get("/delete/resources/:id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       int techId=Resource.findById(Integer.parseInt(request.params(":id"))).getTechId();
@@ -96,16 +136,6 @@ public class App {
       model.put("template", "templates/resource.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
-
-    //post("/edit/reviews/:id");
-    get("/delete/reviews/:id", (request, response) -> {
-      Map<String, Object> model = new HashMap<String, Object>();
-      int resourceId=Review.findById(Integer.parseInt(request.params(":id"))).getResourceId();
-      Review.delete(Integer.parseInt(request.params(":id")));
-      response.redirect("/");
-      return new ModelAndView(model, layout);
-    }, new VelocityTemplateEngine());
-
 
   }
 }

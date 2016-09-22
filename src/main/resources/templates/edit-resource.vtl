@@ -1,0 +1,23 @@
+<h1>Editing: $link.getTitle()</h1>
+<p><a href="/">Go Back (Cancel Editing)</a></p>
+<div class="row">
+  <div class="col-xs-4"></div>
+  <div class="col-xs-4">
+    <h3>Edit resource</h3>
+    <form action='/edit/resources/$link.getId()' method='post'>
+      <div class="form-group">
+        <label for="title">Title: </label>
+        <input id="title" name="title" class="form-control" type="text" value="$link.getTitle()">
+      </div>
+      <div class="form-group">
+        <label for="url">URL: </label>
+        <input id="url" name="url" class="form-control" type="text" value="$link.getUrl()">
+      </div>
+      <div class="form-group">
+        <label for="desc">Description: </label>
+        <input id="desc" name="desc" class="form-control" type="text" value="$link.getDescription()">
+      </div>
+      <button type='submit' class='btn'>Add</button>
+    </form>
+  </div>
+</div>

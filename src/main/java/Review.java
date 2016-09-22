@@ -111,13 +111,13 @@ public class Review {
     }
   }
 
-  public void update(String title, String review, int rating, String reviewer, String email) {
+  public static void update(String title, String review, String reviewer, String email, int id) {
     try(Connection cn = DB.sql2o.open()) {
-      String sql = "UPDATE reviews SET title = :title, review = :review, rating = :rating, reviewer = :reviewer, email = :email WHERE id = :id";
+      String sql = "UPDATE reviews SET title = :title, review = :review, reviewer = :reviewer, email = :email WHERE id = :id";
       cn.createQuery(sql)
         .addParameter("title", title)
         .addParameter("review", review)
-        .addParameter("rating", rating)
+        // .addParameter("rating", rating)
         .addParameter("reviewer", reviewer)
         .addParameter("email", email)
         .addParameter("id", id)

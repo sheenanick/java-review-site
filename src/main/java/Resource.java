@@ -89,10 +89,12 @@ public class Resource {
     }
   }
 
-  public void update(String description) {
+  public static void update(int id, String title, String url, String description) {
     try(Connection cn = DB.sql2o.open()) {
-      String sql = "UPDATE resources SET description = :description WHERE id = :id";
+      String sql = "UPDATE resources SET description = :description, title = :title, url = :url WHERE id = :id";
       cn.createQuery(sql)
+        .addParameter("title", title)
+        .addParameter("url", url)
         .addParameter("description", description)
         .addParameter("id", id)
         .executeUpdate();
