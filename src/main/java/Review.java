@@ -34,9 +34,9 @@ public class Review {
 
     // TODO: get date from database to complete object properties
     // TODO: update average rating for resource
-    // Resource.findById(resourceid).setAverage(getAverageByResource(id));
+    Resource.findById(resourceid).setAverage(Review.getAverageByResource(resourceid));
     // TODO: update review count for resource
-    // Resource.findById(resourceid).setCount(getCountByResource(id));
+    Resource.findById(resourceid).setCount(Review.getCountByResource(resourceid));
   }
 
   public int getId() {
@@ -93,7 +93,7 @@ public class Review {
   }
 
   public static List<Review> allByResource(int id) {
-    String sql = "SELECT * FROM reviews WHERE resourceid = :id ORDER BY date";
+    String sql = "SELECT * FROM reviews WHERE resourceid = :id ORDER BY date DESC";
     try(Connection cn = DB.sql2o.open()) {
       return cn.createQuery(sql)
       .addParameter("id", id)

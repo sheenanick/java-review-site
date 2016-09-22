@@ -15,20 +15,31 @@ public class Resource {
     this.url = url;
     this.description = description;
     this.techid = techid;
+    this.avgrating = 0;
+    this.reviewcount = 0;
 
     try(Connection cn = DB.sql2o.open()) {
-      String sql = "INSERT INTO resources (title, url, description, techid) VALUES (:title, :url, :description, :techid)";
+      String sql = "INSERT INTO resources (title, url, description, techid, rating, reviewcount) VALUES (:title, :url, :description, :techid, :rating, :reviewcount)";
       this.id = (int) cn.createQuery(sql, true)
         .addParameter("title", this.title)
         .addParameter("description", this.description)
         .addParameter("url", this.url)
         .addParameter("techid", this.techid)
+        .addParameter("rating", this.avgrating)
+        .addParameter("reviewcount", this.reviewcount)
         .executeUpdate()
         .getKey();
     }
   }
   protected void setAverage(int avg) {
     avgrating = avg;
+    try (Connection cn = DB.sql2o.open()) {
+      String sql = "UPDATE resources SET avgrating=:avgrating WHERE id=:id";
+      cn.createQuery(sql)
+        .addParameter("avgrating", avg)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
   }
 
   public int getAverageRating() {
@@ -37,6 +48,13 @@ public class Resource {
 
   protected void setCount(int count) {
     reviewcount = count;
+    try (Connection cn = DB.sql2o.open()) {
+      String sql = "UPDATE resources SET reviewcount=:reviewcount WHERE id=:id";
+      cn.createQuery(sql)
+        .addParameter("reviewcount", count)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
   }
 
   public int getReviewCount() {
