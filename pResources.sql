@@ -166,6 +166,20 @@ ALTER TABLE ONLY technologies ALTER COLUMN id SET DEFAULT nextval('technologies_
 COPY resources (id, title, url, description, techid, avgrating) FROM stdin;
 1	Oracle Documentation	https://docs.oracle.com/javase/7/docs/api/	\N	9	\N
 2	Official Source	http://api.jquery.com/	\N	18	\N
+3	MDN (Mozilla Developer Network)	https://developer.mozilla.org/en-US/docs/Web/HTML	\N	17	\N
+4	W3 Schools	http://www.w3schools.com/tags/	\N	17	\N
+5	MDN (Mozilla Developer Network)	https://developer.mozilla.org/en-US/docs/Web/CSS	\N	19	\N
+6	W3Org Documenation	https://www.w3.org/Style/CSS/Overview.en.html	\N	19	\N
+7	Bootstrap Documentation	http://getbootstrap.com/css/	\N	19	\N
+8	TutorialPoint jQuery Tutorials	http://www.tutorialspoint.com/jquery/	\N	18	\N
+9	Java Tutorials by Oracle	https://docs.oracle.com/javase/tutorial/	\N	9	\N
+10	Udemy Free Tutorial for Beginners	https://www.udemy.com/java-tutorial/	\N	9	\N
+11	TutorialPoint Java Tutorial	http://www.tutorialspoint.com/java/	\N	9	\N
+12	Learn Core Java	http://javabeginnerstutorial.com/core-java/	\N	9	\N
+13	Online Tutorial	http://www.learnjavaonline.org/	\N	9	\N
+14	Official Spark Website	http://sparkjava.com/	\N	13	\N
+15	Spark Documentation	http://sparkjava.com/documentation.html	\N	13	\N
+16	Why Spark is so Amazing	https://zeroturnaround.com/rebellabs/sparkjava-is-an-amazing-java-web-framework-do-you-really-need-it/	\N	13	\N
 \.
 
 
@@ -173,7 +187,7 @@ COPY resources (id, title, url, description, techid, avgrating) FROM stdin;
 -- Name: resources_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('resources_id_seq', 2, true);
+SELECT pg_catalog.setval('resources_id_seq', 16, true);
 
 
 --
@@ -212,6 +226,7 @@ COPY technologies (id, name) FROM stdin;
 16	R
 17	HTML
 18	jQuery
+19	CSS
 \.
 
 
@@ -219,7 +234,7 @@ COPY technologies (id, name) FROM stdin;
 -- Name: technologies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('technologies_id_seq', 18, true);
+SELECT pg_catalog.setval('technologies_id_seq', 19, true);
 
 
 --
