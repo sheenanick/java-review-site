@@ -63,6 +63,19 @@ public class ResourceTest {
     assertTrue(Resource.allByTech(tech.getId()).size()>1);
   }
 
+  @Test
+  public void update_updatesDescription() {
+    link.update("Official Oracle Documentation");
+    assertEquals("Official Oracle Documentation", Resource.findById(link.getId()).getDescription());
+  }
+
+  @Test
+  public void delete_deletesResource_true() {
+    int linkId = link.getId();
+    link.delete();
+    assertEquals(null, Resource.findById(linkId));
+  }
+
   @After
   public void tearDown() {
     try(Connection con = DB.sql2o.open()) {

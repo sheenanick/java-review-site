@@ -1,22 +1,36 @@
 <h1>$tech.getName()</h1>
-<ul>
-#foreach ($link in $links)
-  <li><a href="/resources/$link.getId()">$link.getTitle()</a>: <!--$link.getReviewCount() reviews, rating:   $link.getAverageRating()--></li>
-#end
-</ul>
-<h3>Add a new resource</h3>
-<form action='/technologies/$tech.getId()' method='post'>
-  <div class="form-group">
-    <label for="title">Title: </label>
-    <input id="title" name="title" class="form-control" type="text">
+<p><a href="/">Home</a></p>
+<div class="row">
+  <div class="col-xs-4">
+    <h3>Add a new resource</h3>
+    <form action='/technologies/$tech.getId()' method='post'>
+      <div class="form-group">
+        <label for="title">Title: </label>
+        <input id="title" name="title" class="form-control" type="text">
+      </div>
+      <div class="form-group">
+        <label for="name">URL: </label>
+        <input id="url" name="url" class="form-control" type="text">
+      </div>
+      <div class="form-group">
+        <label for="name">Description: </label>
+        <input id="desc" name="desc" class="form-control" type="text">
+      </div>
+      <button type='submit' class='btn'>Add</button>
+    </form>
   </div>
-  <div class="form-group">
-    <label for="name">URL: </label>
-    <input id="url" name="url" class="form-control" type="text">
+  <div class="col-xs-8">
+    <ul>
+    #foreach ($link in $links)
+      <li>
+        $link.getTitle()</a>: $link.getDescription()
+
+        <a href="/technologies/$tech.getId()/resources/$link.getId()">$link.getReviewCount() reviews</a>,
+        rating:   $link.getAverageRating()
+        [<a href="">edit</a>]
+        [<a href="">delete</a>]
+      </li>
+    #end
+    </ul>
   </div>
-  <div class="form-group">
-    <label for="name">Description: </label>
-    <input id="desc" name="desc" class="form-control" type="text">
-  </div>
-  <button type='submit' class='btn'>Add</button>
-</form>
+</div>

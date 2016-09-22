@@ -101,4 +101,37 @@ public class Review {
     }
   }
 
+  public static Review findById(int id) {
+    try(Connection cn = DB.sql2o.open()) {
+      String sql = "SELECT * FROM reviews WHERE id=:id";
+      Review link = cn.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Review.class);
+      return link;
+    }
+  }
+
+  public void update(String title, String review, int rating, String reviewer, String email) {
+    try(Connection cn = DB.sql2o.open()) {
+      String sql = "UPDATE reviews SET title = :title, review = :review, rating = :rating, reviewer = :reviewer, email = :email WHERE id = :id";
+      cn.createQuery(sql)
+        .addParameter("title", title)
+        .addParameter("review", review)
+        .addParameter("rating", rating)
+        .addParameter("reviewer", reviewer)
+        .addParameter("email", email)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
+
+  public void delete() {
+    try(Connection cn = DB.sql2o.open()) {
+      String sql = "DELETE FROM reviews WHERE id = :id;";
+      cn.createQuery(sql)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
+
 }

@@ -82,6 +82,18 @@ public class ReviewTest {
     assertEquals(3, Review.getAverageByResource(resource.getId()));
   }
 
+  @Test
+  public void update_updatesReview() {
+    review.update("It sucks!", "I found everything I was looking for here", 2, "noneofyourbusiness", "nyb@sample.com");
+    assertEquals("I found everything I was looking for here", Review.findById(review.getId()).getReview());
+  }
+
+  @Test
+  public void delete_deletesReview_true() {
+    int reviewId = review.getId();
+    review.delete();
+    assertEquals(null, Review.findById(reviewId));
+  }
   // @After
   // public void tearDown() {
   //   try(Connection con = DB.sql2o.open()) {

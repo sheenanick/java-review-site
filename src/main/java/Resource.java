@@ -89,4 +89,23 @@ public class Resource {
     }
   }
 
+  public void update(String description) {
+    try(Connection cn = DB.sql2o.open()) {
+      String sql = "UPDATE resources SET description = :description WHERE id = :id";
+      cn.createQuery(sql)
+        .addParameter("description", description)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
+
+  public void delete() {
+    try(Connection cn = DB.sql2o.open()) {
+      String sql = "DELETE FROM resources WHERE id = :id;";
+      cn.createQuery(sql)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
+
 }

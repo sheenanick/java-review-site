@@ -1,14 +1,19 @@
 <h1>Technologies</h1>
+<div class="row">
+  <div class="col-xs-4">
+    <h3>Add a new technology</h3>
+    <form action='/' method='post'>
+      <div class="form-group">
+        <label for="name">Name: </label>
+        <input id="name" name="name" class="form-control" type="text">
+      </div>
 
-#foreach ($technology in $technologies)
-  <a href="/technologies/$technology.getId()"><li>$technology.getName()</li></a>
-#end
-<h3>Add a new technology</h3>
-<form action='/' method='post'>
-  <div class="form-group">
-    <label for="name">Name: </label>
-    <input id="name" name="name" class="form-control" type="text">
+      <button type='submit' class='btn'>Add</button>
+    </form>
   </div>
-
-  <button type='submit' class='btn'>Add</button>
-</form>
+  <div class="col-xs-8">
+    #foreach ($technology in $technologies)
+      <a href="/technologies/$technology.getId()"><li>$technology.getName()</li></a>
+    #end
+  </div>
+</div>

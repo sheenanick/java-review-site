@@ -1,0 +1,19 @@
+body {
+  color: #00394d;
+  background: #fdfdfd;
+}
+
+img {
+  width: 120px;
+  height: 60px;
+}
+
+form {
+  background: #e6e6e6;
+  border: dashed black 1px;
+  padding: 18px;
+}
+
+li {
+    font-size: 1.2em;
+}
