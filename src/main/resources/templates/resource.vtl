@@ -52,6 +52,10 @@
         <p><em>$review.getDate()</em></p>
         <p>$review.getReview()</p>
         <p><a href="mailto://$review.getEmail()">$review.getReviewer()</a></p>
+        <p>
+          <a href="/edit/reviews/$review.getId()">edit</a>
+          <a href="/delete/reviews/$review.getId()">delete</a>
+        </p>
       </div>
     #end
   </div>

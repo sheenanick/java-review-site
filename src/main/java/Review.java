@@ -125,7 +125,7 @@ public class Review {
     }
   }
 
-  public void delete() {
+  public static void delete(int id) {
     try(Connection cn = DB.sql2o.open()) {
       String sql = "DELETE FROM reviews WHERE id = :id;";
       cn.createQuery(sql)

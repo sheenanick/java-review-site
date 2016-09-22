@@ -27,7 +27,8 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    // post("/edit", (request, response) -> {
+
+    // post("/edit/technologies/id", (request, response) -> {
     //   Map<String, Object> model = new HashMap<String, Object>();
     //   Technology tech = new Technology(request.queryParams("name"));
     //   //update
@@ -59,6 +60,15 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    //post("/edit/technologies/:tid");
+    get("/delete/resources/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      int techId=Resource.findById(Integer.parseInt(request.params(":id"))).getTechId();
+      Resource.delete(Integer.parseInt(request.params(":id")));
+      response.redirect("/technologies/" + techId);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
     get("/technologies/:tid/resources/:rid", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       int category = Integer.parseInt(request.params(":rid"));
@@ -86,5 +96,16 @@ public class App {
       model.put("template", "templates/resource.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    //post("/edit/reviews/:id");
+    get("/delete/reviews/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      int resourceId=Review.findById(Integer.parseInt(request.params(":id"))).getResourceId();
+      Review.delete(Integer.parseInt(request.params(":id")));
+      response.redirect("/");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+
   }
 }

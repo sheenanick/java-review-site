@@ -72,7 +72,7 @@ public class ResourceTest {
   @Test
   public void delete_deletesResource_true() {
     int linkId = link.getId();
-    link.delete();
+    Resource.delete(linkId);
     assertEquals(null, Resource.findById(linkId));
   }
 

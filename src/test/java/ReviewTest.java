@@ -91,14 +91,14 @@ public class ReviewTest {
   @Test
   public void delete_deletesReview_true() {
     int reviewId = review.getId();
-    review.delete();
+    Review.delete(reviewId);
     assertEquals(null, Review.findById(reviewId));
   }
-  // @After
-  // public void tearDown() {
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String sql = "DELETE FROM reviews *;";
-  //     con.createQuery(sql).executeUpdate();
-  //   }
-  // }
+  @After
+  public void tearDown() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM reviews *;";
+      con.createQuery(sql).executeUpdate();
+    }
+  }
 }
