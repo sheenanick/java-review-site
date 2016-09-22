@@ -1,4 +1,3 @@
-<h1>Technologies</h1>
 <div class="row">
   <div class="col-xs-4">
     <h3>Add a new technology</h3>
@@ -7,13 +6,18 @@
         <label for="name">Name: </label>
         <input id="name" name="name" class="form-control" type="text">
       </div>
-
       <button type='submit' class='btn'>Add</button>
     </form>
   </div>
-  <div class="col-xs-8">
-    #foreach ($technology in $technologies)
-      <a href="/technologies/$technology.getId()"><li>$technology.getName()</li></a>
-    #end
+  <div class="col-xs-1"></div>
+  <div class="col-xs-7">
+    <h1>Technologies</h1>
+    <div class="row">
+      #foreach ($technology in $technologies)
+        <div class="col-xs-4"><h2>
+          <a href="/technologies/$technology.getId()">$technology.getName()</a>
+        </h2></div>
+      #end
+    </div>
   </div>
 </div>

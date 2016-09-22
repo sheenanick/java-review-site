@@ -21,7 +21,6 @@ public class App {
     post("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       Technology tech = new Technology(request.queryParams("name"));
-      //response.redirect("/");
       model.put("technologies", Technology.all());
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
@@ -63,6 +62,7 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       int category = Integer.parseInt(request.params(":tid"));
       model.put("tech", Technology.findById(category));
+      model.put("ext", ".png");
       model.put("links", Resource.allByTech(category));
       model.put("template", "templates/technology.vtl");
       return new ModelAndView(model, layout);
@@ -76,6 +76,7 @@ public class App {
                                       request.queryParams("desc"),
                                       category);
       model.put("tech", Technology.findById(category));
+      model.put("ext", ".png");
       model.put("links", Resource.allByTech(category));
       model.put("template", "templates/technology.vtl");
       return new ModelAndView(model, layout);

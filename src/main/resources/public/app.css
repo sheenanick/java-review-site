@@ -6,6 +6,24 @@ body {
 img {
   width: 120px;
   height: 60px;
+  float: left;
+}
+
+img.center {
+  width:80%;
+  height:100%;
+  margin:auto;
+  display:block;
+  float: none;
+}
+
+h1.center {
+  text-align: center;
+}
+
+h3 {
+  padding-bottom: 0;
+  margin-bottom: 2px;
 }
 
 form {
@@ -16,4 +34,12 @@ form {
 
 li {
     font-size: 1.2em;
+}
+
+a {
+  color:#a67911;
+}
+
+a:hover {
+  color: #06400e;
 }

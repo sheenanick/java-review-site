@@ -19,13 +19,13 @@ public class Resource {
     this.reviewcount = 0;
 
     try(Connection cn = DB.sql2o.open()) {
-      String sql = "INSERT INTO resources (title, url, description, techid, rating, reviewcount) VALUES (:title, :url, :description, :techid, :rating, :reviewcount)";
+      String sql = "INSERT INTO resources (title, url, description, techid, avgrating, reviewcount) VALUES (:title, :url, :description, :techid, :avgrating, :reviewcount)";
       this.id = (int) cn.createQuery(sql, true)
         .addParameter("title", this.title)
         .addParameter("description", this.description)
         .addParameter("url", this.url)
         .addParameter("techid", this.techid)
-        .addParameter("rating", this.avgrating)
+        .addParameter("avgrating", this.avgrating)
         .addParameter("reviewcount", this.reviewcount)
         .executeUpdate()
         .getKey();
@@ -99,7 +99,7 @@ public class Resource {
   }
 
   public static List<Resource> allByTech(int id) {
-    String sql = "SELECT * FROM resources WHERE techid = :id ORDER BY title";
+    String sql = "SELECT * FROM resources WHERE techid = :id ORDER BY avgrating DESC";
     try(Connection cn = DB.sql2o.open()) {
       return cn.createQuery(sql)
       .addParameter("id", id)

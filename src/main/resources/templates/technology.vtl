@@ -1,5 +1,3 @@
-<h1>$tech.getName()</h1>
-<p><a href="/">Home</a></p>
 <div class="row">
   <div class="col-xs-4">
     <h3>Add a new resource</h3>
@@ -20,17 +18,26 @@
     </form>
   </div>
   <div class="col-xs-8">
-    <ul>
+    <div class="row">
+      <div class="col-xs-2"></div>
+      <div class="col-xs-10">
+        <h1>$tech.getName()</h1>
+      </div>
+    </div>
     #foreach ($link in $links)
-      <li>
-        $link.getTitle()</a>: $link.getDescription()
-
-        <a href="/technologies/$tech.getId()/resources/$link.getId()">$link.getReviewCount() reviews</a>,
-        rating:   $link.getAverageRating()
-        [<a href="/edit/resources/$link.getId()">edit</a>]
-        [<a href="/delete/resources/$link.getId()">delete</a>]
-      </li>
+    <div class="row">
+      <div class="col-xs-2"></div>
+      <div class="col-xs-1">
+        #if($link.getAverageRating()>0)
+          <img src="/images/$link.getAverageRating()stars$ext" alt="average rating - $link.getAverageRating() star">
+        #end
+      </div>
+      <div class="col-xs-8">
+        <h3>$link.getTitle() <small><a href="/edit/resources/$link.getId()">edit</a> <a href="/delete/resources/$link.getId()">delete</a></small></h3>
+        <p><em>$link.getDescription()</em></p>
+        <p><a href="/technologies/$tech.getId()/resources/$link.getId()">$link.getReviewCount() reviews</a></p>
+      </div>
+    </div>
     #end
-    </ul>
   </div>
 </div>
