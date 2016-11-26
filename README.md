@@ -53,17 +53,21 @@ A program to add links to resources and allow users to leave reviews/ratings.
 | Count number of reviews for resource  | 1                                                | 1                                                |
 ## Setup/Installation
 * Clone directory
-* Type 'gradle run' inside the directory
-* Navigate to 'http://localhost:5467'
+* Type `gradle run` inside the directory
+* Navigate to 'http://localhost:5467' in your web browser
 
 ## Support & Contact
-For questions, concerns, or suggestions please email karenfreemansmith@gmail.com
+For questions, concerns, or suggestions please email karenfreemansmith@gmail.com or sheenanick@gmail.com
 
 ## Known Issues
 * N/A
 
 ## Technologies Used
-Java, JUnit, Spark, Gradle, PostgreSQL
+* Java
+* JUnit
+* Spark
+* Gradle
+* PostgreSQL
 
 ## Legal
 *Licensed under the GNU General Public License v3.0*
